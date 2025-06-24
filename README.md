@@ -29,11 +29,13 @@ MTGBulkSingles is a .NET 8 console application for Magic: The Gathering players 
 ## Usage
 
 1. Prepare your decklist in MTG Arena format (plain text file).
-2. Run the application from the command line:
+2. Run the application from the command line (or drag 'n' drop your text file onto the EXE on Windows):
     `MTGBulkSingles.exe <path to decklist>`
 
 Example:
-    `MTGBulkSingles.exe mydeck.txt`
+    ```
+    MTGBulkSingles.exe mydeck.txt
+    ```
 
 
 3. On first run, a `settings.json` file will be created. You can edit this file to adjust options such as:
@@ -47,7 +49,9 @@ Example:
 
 ## Example settings.json
 
-`{ "printAllVersions": false, "matchNameExactly": true, "useDelay": true, "includeArtCards": false, "delayMilliseconds": 2000, "settingsVersion": 1 }`
+```
+{ "printAllVersions": false, "matchNameExactly": true, "useDelay": true, "includeArtCards": false, "delayMilliseconds": 2000, "settingsVersion": 1 }
+```
 
 ## Notes
 
