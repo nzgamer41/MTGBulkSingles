@@ -19,18 +19,23 @@ MTGBulkSingles is a .NET 8 console application for Magic: The Gathering players 
 ## Installation
           
 1. Clone this repository:
-    `git clone https://github.com/yourusername/MTGBulkSingles.git`
-    `cd MTGBulkSingles`
-    
-2. Build the project:
-    
-
+```
+git clone https://github.com/yourusername/MTGBulkSingles.git
+cd MTGBulkSingles
+```
+ 
+3. Build the project:
+```
+dotnet build
+```
     
 ## Usage
 
 1. Prepare your decklist in MTG Arena format (plain text file).
 2. Run the application from the command line (or drag 'n' drop your text file onto the EXE on Windows):
     `MTGBulkSingles.exe <path to decklist>`
+
+(Note, on macOS and Linux the application will be called MTGBulkSingles, you can launch this from a Terminal the same way as Windows users would. You can also run `dotnet MTGBulkSingles.dll <path to decklist>` if .NET 8 is installed on your system.)
 
 Example:
     ```
@@ -55,12 +60,15 @@ Example:
 
 ## Notes
 
-- Disabling the delay (`useDelay: false`) may result in your IP being banned by the MTG Singles API. Use with caution.
+- Disabling the delay (`useDelay: false`) may result in your IP being banned/ratelimited by the MTG Singles API. Use with caution.
 - The application is intended for personal use and not for commercial scraping.
 
 ## License
 
-2025 nzgamer41  
+2025 nzgamer41 licensed under GNU AGPL 3.0
+
+Thank you to the creator of mtgsingles.co.nz for permission to use your API!
+
 See [LICENSE](LICENSE) for details.
 
 
