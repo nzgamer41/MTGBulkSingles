@@ -20,7 +20,7 @@ MTGBulkSingles is a .NET 8 console application for Magic: The Gathering players 
           
 1. Clone this repository:
 ```
-git clone https://github.com/yourusername/MTGBulkSingles.git
+git clone https://github.com/nzgamer41/MTGBulkSingles.git
 cd MTGBulkSingles
 ```
  
