@@ -1,5 +1,6 @@
 ﻿using MTGBulkSingles.Classes;
 using MTGBulkSingles.Functions;
+using Velopack;
 
 namespace MTGBulkSingles
 {
@@ -8,6 +9,7 @@ namespace MTGBulkSingles
         static Settings programSettings;
         static void Main(string[] args)
         {
+            VelopackApp.Build().Run();
             if (File.Exists("settings.json"))
             {
                 programSettings = SettingsHandler.ReadFromJsonFile<Settings>("settings.json");
@@ -20,6 +22,15 @@ namespace MTGBulkSingles
             string header = " /$$      /$$ /$$$$$$$$/$$$$$$                            \r\n| $$$    /$$$|__  $$__/$$__  $$                           \r\n| $$$$  /$$$$   | $$ | $$  \\__/                           \r\n| $$ $$/$$ $$   | $$ | $$ /$$$$                           \r\n| $$  $$$| $$   | $$ | $$|_  $$                           \r\n| $$\\  $ | $$   | $$ | $$  \\ $$                           \r\n| $$ \\/  | $$   | $$ |  $$$$$$/                           \r\n|__/     |__/   |__/  \\______/                            \r\n /$$$$$$$            /$$ /$$                              \r\n| $$__  $$          | $$| $$                              \r\n| $$  \\ $$ /$$   /$$| $$| $$   /$$                        \r\n| $$$$$$$ | $$  | $$| $$| $$  /$$/                        \r\n| $$__  $$| $$  | $$| $$| $$$$$$/                         \r\n| $$  \\ $$| $$  | $$| $$| $$_  $$                         \r\n| $$$$$$$/|  $$$$$$/| $$| $$ \\  $$                        \r\n|_______/  \\______/ |__/|__/  \\__/                        \r\n  /$$$$$$  /$$                     /$$                    \r\n /$$__  $$|__/                    | $$                    \r\n| $$  \\__/ /$$ /$$$$$$$   /$$$$$$ | $$  /$$$$$$   /$$$$$$$\r\n|  $$$$$$ | $$| $$__  $$ /$$__  $$| $$ /$$__  $$ /$$_____/\r\n \\____  $$| $$| $$  \\ $$| $$  \\ $$| $$| $$$$$$$$|  $$$$$$ \r\n /$$  \\ $$| $$| $$  | $$| $$  | $$| $$| $$_____/ \\____  $$\r\n|  $$$$$$/| $$| $$  | $$|  $$$$$$$| $$|  $$$$$$$ /$$$$$$$/\r\n \\______/ |__/|__/  |__/ \\____  $$|__/ \\_______/|_______/ \r\n                         /$$  \\ $$                        \r\n                        |  $$$$$$/                        \r\n                         \\______/  ";
             Console.Write(header);
             Console.WriteLine("2025 nzgamer41");
+            Console.WriteLine("Checking for updates...");
+            try
+            {
+                Task.Run(() => UpdateApp()).GetAwaiter().GetResult();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error checking for updates: " + ex.Message);
+            }
             if (args.Length != 1 || !File.Exists(args[0]))
             {
                 Console.WriteLine("Usage: MTGBulkSingles.exe <path to decklist>");
@@ -102,6 +113,21 @@ namespace MTGBulkSingles
             }
             Console.WriteLine("All listings fetched! Press Enter to exit.");
             Console.ReadLine();
+        }
+
+        private static async Task UpdateApp()
+        {
+            var mgr = new UpdateManager("");
+            // check for new version
+            var newVersion = await mgr.CheckForUpdatesAsync();
+            if (newVersion == null)
+                return; // no update available
+
+            // download new version
+            await mgr.DownloadUpdatesAsync(newVersion);
+
+            // install new version and restart app
+            mgr.ApplyUpdatesAndRestart(newVersion);
         }
     }
 }
