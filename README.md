@@ -1,3 +1,5 @@
+# NOTE: The creator of MTGSingles.co.nz has added protection to the API behind the website, so it is not possible anymore to use this tool :(. The code will be left as a reference but no support will be given.
+
 # MTGBulkSingles
 
 MTGBulkSingles is a .NET 8 console application for Magic: The Gathering players and collectors. It allows you to quickly fetch and compare prices for all cards in a decklist using the MTG Singles API. The tool supports both fetching the cheapest version of each card or all available versions, and outputs results to the console and CSV.
