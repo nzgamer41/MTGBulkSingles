@@ -19,8 +19,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <Compile Remove="MTGBulkSingles.Api\**" />
+    <EmbeddedResource Remove="MTGBulkSingles.Api\**" />
+    <None Remove="MTGBulkSingles.Api\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Velopack" Version="0.0.1298" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="MTGBulkSingles.Api\MTGBulkSingles.Api.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
-namespace MTGBulkSingles.Classes
+namespace MTGBulkSingles.Api
 {
-    internal class MTGSCardListing
+    public class MTGSCardListing
     {
-        public string Store { get; set; }
-        public string TcgType { get; set; }
-        public string SetName { get; set; }
-        public string Title { get; set; }
+        public string Store { get; set; } = "";
+        public string TcgType { get; set; } = "";
+        public string SetName { get; set; } = "";
+        public string Title { get; set; } = "";
         [JsonIgnore] // Ignore this during deserialization
         public decimal Price { get; set; }
 
@@ -29,8 +24,8 @@ namespace MTGBulkSingles.Classes
             }
         }
 
-        public string Url { get; set; }
-        public string ImageUrl { get; set; }
-        public List<string> Features { get; set; }
+        public string Url { get; set; } = "";
+        public string ImageUrl { get; set; } = "";
+        public List<string> Features { get; set; } = new();
     }
 }

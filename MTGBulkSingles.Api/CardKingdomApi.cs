@@ -2,23 +2,29 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace MTGBulkSingles.Functions
+namespace MTGBulkSingles.Api
 {
-    internal class CardKingdomApi
+    public class CardKingdomApi
     {
+        private static readonly HttpClient _http = CreateHttpClient();
+
         private Dictionary<string, decimal> _prices = new();
 
         public decimal UsdToNzdRate { get; private set; } = 0m;
         public bool ExchangeRateLoaded => UsdToNzdRate > 0;
 
+        private static HttpClient CreateHttpClient()
+        {
+            var http = new HttpClient();
+            http.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36");
+            return http;
+        }
+
         public async Task FetchPriceListAsync()
         {
             try { await FetchExchangeRateAsync(); } catch { }
 
-            using var http = new HttpClient();
-            http.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36");
-
-            var response = await http.GetAsync("https://api.cardkingdom.com/api/pricelist");
+            var response = await _http.GetAsync("https://api.cardkingdom.com/api/pricelist");
             response.EnsureSuccessStatusCode();
 
             var body = await response.Content.ReadAsStringAsync();
@@ -35,8 +41,7 @@ namespace MTGBulkSingles.Functions
 
         private async Task FetchExchangeRateAsync()
         {
-            using var http = new HttpClient();
-            var response = await http.GetAsync("https://open.er-api.com/v6/latest/USD");
+            var response = await _http.GetAsync("https://open.er-api.com/v6/latest/USD");
             response.EnsureSuccessStatusCode();
 
             var body = await response.Content.ReadAsStringAsync();
@@ -58,12 +63,12 @@ namespace MTGBulkSingles.Functions
         }
     }
 
-    internal class CkResponse
+    public class CkResponse
     {
         public List<CkEntry> Data { get; set; } = new();
     }
 
-    internal class CkEntry
+    public class CkEntry
     {
         public string Name { get; set; } = "";
 
@@ -74,7 +79,7 @@ namespace MTGBulkSingles.Functions
         public string PriceRetail { get; set; } = "0";
     }
 
-    internal class ErApiResponse
+    public class ErApiResponse
     {
         public Dictionary<string, decimal> Rates { get; set; } = new();
     }

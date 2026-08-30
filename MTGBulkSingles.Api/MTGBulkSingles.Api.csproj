@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Title>MTGBulkSingles.Api</Title>
+    <Version>1.0.0</Version>
+    <Authors>nzgamer41</Authors>
+    <Description>Reusable HTTP clients for Card Kingdom and MTGSingles.co.nz card pricing APIs.</Description>
+    <Copyright>Copyright nzgamer41 2025</Copyright>
+  </PropertyGroup>
+
+</Project>

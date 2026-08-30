@@ -24,6 +24,7 @@ namespace MTGBulkSingles.Functions
                     return parts.Length == 2 ? parts[1].Trim() : trimmed;
                 })
                 .Where(name => !string.IsNullOrWhiteSpace(name))
+                .Select(name => name!)
                 .ToList();
         }
     }

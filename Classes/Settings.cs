@@ -13,7 +13,6 @@ namespace MTGBulkSingles.Classes
         public bool useDelay { get; set; } = true;
         public bool includeArtCards { get; set; } = false;
         public int delayMilliseconds { get; set; } = 5000;
-        public int settingsVersion = 1;
-
+        public int settingsVersion { get; set; } = 1;
     }
 }
